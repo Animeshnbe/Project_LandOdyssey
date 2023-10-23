@@ -1,0 +1,22 @@
+[
+        { "name": "Eswatini", "lat": -26.5225, "lon": 31.4659, "population": "1.15", "density": "67", "area": "17,364", "waste": "0.23", "efficiency": "70", "recycled": "30", "methods": "Dumping, burning and landfilling", "types": ["Dry","Inerts","Biodegradable organic waste"], "values":[10,30,60]},
+    
+        { "name": "Ethiopia", "lat": 9.1450, "lon": 40.4897, "population": "117", "density": "115", "area": "1,104,300", "waste": "4.5", "efficiency": "NA", "recycled": "5", "methods": "Dumping, burning and landfilling", "types": ["Metal","Glass","Plastic","Paper","Biodegradable organic waste","Others"], "values":[1,1,8,6,67,17]},
+    
+        { "name": "Ghana", "lat": 7.9465, "lon": -1.0232, "population": "31", "density": "137", "area": "238,535", "waste": "4.6", "efficiency": "60", "recycled": "30", "methods": "Dumping, burning and landfilling","types": ["Metal", "Glass", "Plastic", "Paper","Biodegradable organic waste","Textile","Inerts","Leather and Rubber","Others"], "values":[3,3,14,6,61,1,6,1,5]},
+    
+        { "name": "Kenya", "lat": -0.0236, "lon": 37.9062, "population": "44", "density": "115", "area": "569137", "waste": "8", "efficiency": "43", "recycled": "NA", "methods": "Dumping, burning and landfilling","types": ["Paper","Inorganic","Plastics","Biodegradable organic waste","Leather and Textile"], "values":[11,8,14,59,8]},
+    
+        { "name": "Mozambique", "lat": -18.6657, "lon": 35.5296, "population": "30.6", "density": "40", "area": "801590", "waste": "2.5", "efficiency": "42", "recycled": "NA", "methods": "Dumping, burning and landfilling","types": ["Metal","Glass","Plastic","Paper","Biodegradable organic waste","Fine fraction","Others"], "values":[4,2,10,12,68,0,4]},
+    
+        { "name": "Namibia", "lat": -22.9576, "lon": 18.4904, "population": "2.54", "density": "3", "area": "824292", "waste": "0.25", "efficiency": "42.4", "recycled": "NA", "methods": "Dumping, burning and burying","types": ["Metal","Glass","Plastic","Paper","Biodegradable organic waste","Others"], "values":[4,14,11,15,47,9]},
+    
+        { "name": "Rwanda", "lat": -1.9403, "lon": 29.8739, "population": "13", "density": "525", "area": "26338", "waste": "2.2", "efficiency": "20", "recycled": "10", "methods": "Dumping, burning","types": ["Metal","Glass","Plastic","Paper","Biodegradable organic waste","Others"], "values":[2,1,2,16,77,2]},
+    
+        { "name": "Tanzania", "lat": -6.3690, "lon": 34.8888, "population": "59.73", "density": "67", "area": "945087", "waste": "15", "efficiency": "50", "recycled": "NA", "methods": "Dumping, burning and burying","types": ["Metal","Glass","Plastic","Paper","Biodegradable organic waste","Textile","Ash"], "values":[1,4,7,11,67,2,8]},
+    
+        { "name": "Uganda", "lat": 1.3733, "lon": 32.2903, "population": "48", "density": "157", "area": "241038", "waste": "6.6", "efficiency": "43.7", "recycled": "NA", "methods": "Dumping, burning and landfilling","types": ["Metal","Glass","Plastic","Paper","Biodegradable organic waste","Textile","Stone Debris","Others"], "values":[1,1,8,7,71,1,8,3]},
+    
+        { "name": "Zambia", "lat": -13.1339, "lon": 27.8493, "population": "18.38", "density": "25", "area": "752618", "waste": "2.6", "efficiency": "45", "recycled": "NA", "methods": "Dumping, burning and burying","types": ["Metal","Glass","Plastic","Paper","Biodegradable organic waste","Others"], "values":[1,2,7,3,39,48]}
+    
+    ]

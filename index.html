@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Africa Map</title>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v2.min.js"></script>
+
+</head>
+<body>
+    <div class="card" id="map"></div>
+    <script src="script.js"></script>
+
+    <div class="card block-1">
+        <!-- <form> -->
+            Set Map Layers
+            <div class="maplayers">
+              <input type="checkbox" id="waste" checked>
+              <label for="waste">Waste Generation</label>
+            </div>
+            <div class="maplayers">
+              <input type="checkbox" id="landfills">
+              <label for="landfills">Landfills</label>
+            </div>
+            <div class="maplayers">
+              <input type="checkbox" id="hunger">
+              <label for="hunger">Hunger</label>
+            </div>
+        <!-- </form> -->
+    </div>
+
+    <div class="card block-2">
+        Solutions and Mission progress
+        <ul class="initiatives">
+            <li>Great Green Wall</li>
+            <li>AFR100 Reforestation</li>
+        </ul>
+    </div>
+
+    <div class="card block-3">
+        <div class="ImageSlider">Africa land and climate patterns
+            <div class="n"><img src="./img/rs/aridity.png" alt=""></div>
+            <div class="n"><img src="./img/rs/desertif_vulner.png" alt=""></div>
+            <div class="n"><img src="./img/rs/land_degradation.png" alt=""></div>
+            <div class="n"><img src="./img/rs/rainfall.png" alt=""></div>
+            <div class="n"><img src="./img/rs/soil_loss.png" alt=""></div>
+            <div class="n"><img src="./img/rs/soil_productivity.png" alt=""></div>
+            <div class="n"><img src="./img/rs/soil_nutrient.png" alt=""></div>
+        </div>
+        <div class="navigation">
+            <button id="left"><i class="fa-solid fa-angle-left"></i></button>
+            <span id="imageNumber"></span>
+            <button id="right"><i class="fa-solid fa-angle-right"></i></button>
+        </div>
+        <a url=""></a>
+    </div>
+
+    <div class="card block-4">
+        <!-- Content of the top-left block goes here -->
+        Plots
+    </div>
+
+    <div class="card news">
+        <h3>In the news... </h3>
+        <ul id="news-list"></ul>
+    </div>
+
+</body>
+</html>

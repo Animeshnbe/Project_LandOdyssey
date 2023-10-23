@@ -1,0 +1,22 @@
+[
+    { "name": "Eswatini", "lat": -26.5225, "lon": 31.4659, "yoy_change":},
+
+    { "name": "Ethiopia", "lat": 9.1450, "lon": 40.4897, "yoy_change":-73},
+
+    { "name": "Ghana", "lat": 7.9465, "lon": -1.0232, "yoy_change":},
+
+    { "name": "Kenya", "lat": -0.0236, "lon": 37.9062, "yoy_change":},
+
+    { "name": "Mozambique", "lat": -18.6657, "lon": 35.5296, "yoy_change":-239.25},
+
+    { "name": "Namibia", "lat": -22.9576, "lon": 18.4904, "yoy_change":},
+
+    { "name": "Rwanda", "lat": -1.9403, "lon": 29.8739, "yoy_change":},
+
+    { "name": "Tanzania", "lat": -6.3690, "lon": 34.8888, "yoy_change":-469},
+
+    { "name": "Uganda", "lat": 1.3733, "lon": 32.2903, "yoy_change":},
+
+    { "name": "Zambia", "lat": -13.1339, "lon": 27.8493, "yoy_change":-188.21}
+
+]
