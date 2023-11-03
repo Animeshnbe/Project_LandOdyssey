@@ -1,5 +1,5 @@
 import json
-import csv
+# import csv
 
 # countries = ["Ethiopia", "Ghana", "Mozambique", "Namibia", "South Africa", "Tanzania", "Uganda"]
 cat = {"sa": ["Botswana", "Eswatini", "Lesotho", "Namibia", "South Africa", "Zimbabwe"], 
@@ -11,20 +11,21 @@ all = ["Botswana", "Burkina Faso", "Chad", "Djibouti", "Eritrea", "Eswatini", "E
        "Namibia", "Niger", "Nigeria", "Rwanda", "Senegal", "Somalia", "South Africa", "Sudan", "Tanzania", "Uganda", "Zimbabwe"]
 
 
+
+def get_data(mp):
+    with open(mp+".json", "r") as f:
+        mapping = json.load(f)
+    return mapping
+
 mapping = {}
+for data in ["ghi","hdi","hci","mort","infm"]:
+    mapping[data] = get_data(data)
 
-with open("ghi.csv", "r") as f:
-    r = csv.reader(f)
-    next(r)
-    for row in r:
-        if row[0] in all:
-            mapping[row[0]] = row[2]
+# with open('ghg.json', 'r') as f:
+#     ghg_mapping = json.load(f)
 
-with open('ghg.json', 'r') as f:
-    ghg_mapping = json.load(f)
-
-with open('farea.json', 'r') as f:
-    farea_mapping = json.load(f)
+# with open('farea.json', 'r') as f:
+#     farea_mapping = json.load(f)
 
 with open('countries.geojson', 'r') as geojson_file:
     geojson_data = json.load(geojson_file)
@@ -34,8 +35,11 @@ for feature in geojson_data['features']:
     # properties = feature['properties']
     if feature['properties'].get("ADMIN") in all:
         country = feature['properties']["ADMIN"]
-        if country in mapping:
-            feature['properties']["GHI"] = mapping[country]
+        for mp,val in mapping.items():
+            if country in val:
+                feature['properties'][mp.upper()] = val[country]
+            else:
+                feature['properties'][mp.upper()] = -1
         filtered_features.append(feature)
 
 # Create a new dictionary with only the filtered features
@@ -44,5 +48,5 @@ filtered_geojson_data = {
     "features": filtered_features
 }
 
-with open('africa.geojson', 'w') as output_file:
+with open('africa_mod.geojson', 'w') as output_file:
     json.dump(filtered_geojson_data, output_file)
