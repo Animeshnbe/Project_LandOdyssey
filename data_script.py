@@ -30,7 +30,7 @@ import csv
 import json
 
 
-all = ["Botswana", "Burkina Faso", "Chad", "Djibouti", "Eritrea", "Eswatini", "Ethiopia", "Lesotho", "Malawi", "Mali", "Mauritania", 
+all = ["Cameroon", "Chad", "Congo", "Djibouti", "Eritrea", "Eswatini", "Ethiopia", "Lesotho", "Malawi", "Mali", "Mauritania", 
        "Namibia", "Niger", "Nigeria", "Rwanda", "Senegal", "Somalia", "South Africa", "Sudan", "Tanzania", "Uganda", "Zimbabwe"]
 
 def compile_data(filename):
@@ -55,9 +55,9 @@ def compile_data(filename):
     
     return data
 
-im_data = compile_data('hdi.csv')
-values = {entity: data['Value'] for entity, data in im_data.items() if entity in all}
+im_data = compile_data('annual-deforestation.csv')
+values = {entity: float(data['Value']) for entity, data in im_data.items() if entity in all}
 
 print(values)
-with open("hdi.json", "w") as outfile:
+with open("deforest.json", "w") as outfile:
     json.dump(values, outfile)

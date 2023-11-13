@@ -2,12 +2,12 @@ import json
 import csv
 
 # countries = ["Ethiopia", "Ghana", "Mozambique", "Namibia", "South Africa", "Tanzania", "Uganda"]
-cat = {"sa": ["Botswana", "Eswatini", "Lesotho", "Namibia", "South Africa", "Zimbabwe"], 
-    "sahel": ["Burkina Faso", "Chad", "Ethiopia", "Eritrea", "Mali", "Mauritania", "Niger", "Nigeria", "Senegal", "Sudan"],
+cat = {"sa": ["Eswatini", "Lesotho", "Namibia", "South Africa", "Zimbabwe"], 
+    "sahel": ["Cameroon", "Chad", "Ethiopia", "Eritrea", "Mali", "Mauritania", "Niger", "Nigeria", "Senegal", "Sudan"],
     "horn": ["Ethiopia", "Eritrea", "Djibouti", "Somalia"],
     "glakes": ["Malawi", "Rwanda", "Tanzania", "Uganda"]}
 
-all = ["Botswana", "Burkina Faso", "Chad", "Djibouti", "Eritrea", "Eswatini", "Ethiopia", "Lesotho", "Malawi", "Mali", "Mauritania", 
+all = ["Cameroon", "Chad", "Congo", "Djibouti", "Eritrea", "Eswatini", "Ethiopia", "Lesotho", "Malawi", "Mali", "Mauritania", 
        "Namibia", "Niger", "Nigeria", "Rwanda", "Senegal", "Somalia", "South Africa", "Sudan", "Tanzania", "Uganda", "Zimbabwe"]
 
 x_params = ["farea","cropland","ghg","deforest"]

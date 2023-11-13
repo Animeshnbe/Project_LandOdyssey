@@ -1,8 +1,8 @@
 import csv
-import json
+# import json
 
 
-all = ["Botswana", "Burkina Faso", "Chad", "Djibouti", "Eritrea", "Eswatini", "Ethiopia", "Lesotho", "Malawi", "Mali", "Mauritania", 
+all = ["Cameroon", "Chad", "Congo", "Djibouti", "Eritrea", "Eswatini", "Ethiopia", "Lesotho", "Malawi", "Mali", "Mauritania", 
        "Namibia", "Niger", "Nigeria", "Rwanda", "Senegal", "Somalia", "South Africa", "Sudan", "Tanzania", "Uganda", "Zimbabwe"]
 
 def compile_data(filename):
@@ -25,14 +25,15 @@ def compile_data(filename):
     return data
 
 
-im_data = compile_data('global-hunger-index.csv')
-env_data = compile_data('annual-deforestation.csv')
-# print(im_data)
-country = "Ethiopia"
-common_years = set(im_data[country].keys()) & set(env_data[country].keys())
+im_data = compile_data('ghi.csv')
+env_data = compile_data('ghg.csv')
+# # print(im_data)
+# country = "Ethiopia"
+# common_years = set(im_data[country].keys()) & set(env_data[country].keys())
 
-y_series = im_data[country]
-x_series = {year: env_data[country][year] for year in common_years}
+# y_series = im_data[country]
+# # x_series = {year: env_data[country][year] for year in common_years}
+# x_series = env_data[country]
 
 from matplotlib import pyplot as plt
 import numpy as np
@@ -45,17 +46,38 @@ def scale(ydata):
     y_values_scaled = y_values_scaled.flatten()
     return y_values_scaled
 
-plt.figure(figsize=(10, 6))
+# plt.figure(figsize=(10, 6))
+# plt.plot(y_series.keys(), scale(list(y_series.values())), label="Hunger")
+# plt.plot(x_series.keys(), scale(list(x_series.values())), label="Deforestation")
+# plt.xlabel("Year")
+# plt.ylabel('National Index')
+# plt.title(country)
+# plt.legend()
+# plt.grid(True)
+# plt.show()
 
 
-plt.plot(y_series.keys(), scale(list(y_series.values())), label="Hunger")
-print(scale(list(x_series.values())))
-plt.plot(x_series.keys(), scale(list(x_series.values())), label="Deforestation")
+countries = all[1:9]
+print(countries)
+print(len(countries))
+fig, axes = plt.subplots(len(countries)//3+1, 3, figsize=(10, 6*len(countries)), sharex=True)
+
+for i, country in enumerate(countries):
+    y_series = im_data[country] 
+    x_series = env_data[country]
+
+    # print("Len ",country,len(y_series),len(x_series))
+    if (len(y_series)>0):
+        axes[i//3,i%3].plot(y_series.keys(), scale(list(y_series.values())), label="Emissions")
+    if (len(x_series)>0):
+        axes[i//3,i%3].plot(x_series.keys(), scale(list(x_series.values())), label="Deforestation")
+
+    axes[i//3,i%3].set_title(country)
+    axes[i//3,i%3].set_ylabel('National Index')
+    # axes[i].grid(True)
+    axes[i//3,i%3].legend()
+
 plt.xlabel("Year")
-plt.ylabel('National Index for '+country)
-# plt.title('')
-plt.legend()
-plt.grid(True)
+plt.tight_layout()
+
 plt.show()
-# with open("hdi.json", "w") as outfile:
-#     json.dump(im_data, outfile)

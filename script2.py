@@ -7,7 +7,7 @@ cat = {"sa": ["Botswana", "Eswatini", "Lesotho", "Namibia", "South Africa", "Zim
     "horn": ["Ethiopia", "Eritrea", "Djibouti", "Somalia"],
     "glakes": ["Malawi", "Rwanda", "Tanzania", "Uganda"]}
 
-all = ["Botswana", "Burkina Faso", "Chad", "Djibouti", "Eritrea", "Eswatini", "Ethiopia", "Lesotho", "Malawi", "Mali", "Mauritania", 
+all = ["Cameroon", "Chad", "Congo", "Djibouti", "Eritrea", "Eswatini", "Ethiopia", "Lesotho", "Malawi", "Mali", "Mauritania", 
        "Namibia", "Niger", "Nigeria", "Rwanda", "Senegal", "Somalia", "South Africa", "Sudan", "Tanzania", "Uganda", "Zimbabwe"]
 
 
@@ -48,5 +48,5 @@ filtered_geojson_data = {
     "features": filtered_features
 }
 
-with open('africa_mod.geojson', 'w') as output_file:
+with open('africa.geojson', 'w') as output_file:
     json.dump(filtered_geojson_data, output_file)
