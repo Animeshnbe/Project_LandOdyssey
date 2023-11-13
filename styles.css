@@ -97,6 +97,11 @@
     background-color: #0056b3;
 }
 
+.square {
+    width: 100%;
+    height: 100%;
+  }
+
 body {
     margin-bottom: 20px;
     font: 300 16px/1.7 'Open Sans', sans-serif;

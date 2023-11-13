@@ -207,7 +207,74 @@ fetch('african_countries.json')
         });
     });
 
+fetch('africa_mines.json')
+    .then(response => response.json())
+    .then(data => {
+        var all_mines = [];
+        const commodityColorMapping = {
+            'Coal': 'black',
+            'Chromium': 'red',
+            'Copper': '#5c3027',
+            'Gold': 'yellow',
+            'Platinum': 'blue',
+            'Uranium': 'green',
+            'Diamond': '#d1f0ef'
+            // Add more commodity types and colors as needed
+        };
+        
+        data.forEach(country => {
+            const popupContent = document.createElement('div');
+            popupContent.className = 'mines-popup';
+            popupContent.innerHTML = `
+                <div class="custom-popup">
+                    <h2>${country.name}</h2>
+                    <table border = 1>
+                        <tr>
+                        <td>Commodity</td>
+                        <td>${country.commodity}</td>
+                        </tr>
+                        <tr>
+                        <td>Inception Year</td>
+                        <td>${country.inception_year}</td>
+                        </tr>
+                        <tr>
+                        <td>Production</td>
+                        <td>${country.production} kgs/day</td>
+                        </tr>
+                        <tr>
+                        <td>Energy Consumption in kWh/t</td>
+                        <td>${country.energy_consumption}</td>
+                        </tr>
+                    </table>
+                </div>
+            `;
+            var regex = /\((-?\d+\.\d+), (-?\d+\.\d+)\)/;
+            var matches = country.location.match(regex);
 
+            var latitude = parseFloat(matches[1]);
+            var longitude = parseFloat(matches[2]);
+
+            let markerColor = commodityColorMapping[country.commodity] || 'gray';
+            // console.log(markerColor);
+            const marker = L.marker([latitude, longitude], { icon: L.divIcon({ iconSize: [10, 10], html: `<div class='square' style="background-color: ${markerColor}"></div>` }) })
+                .bindPopup(popupContent, { maxWidth: 300 }) // Set max width for the popup
+                .on('click', () => {
+                    L.popup().setContent(popupContent).setLatLng([country.lat, country.lon]).openOn(map);
+                });
+            all_mines.push(marker);
+        });
+
+        var mineMarker = document.getElementById('mines');
+        mineMarker.addEventListener('change', () => {
+            // console.log(all_mines);
+            if (mineMarker.checked) {
+                all_mines.forEach(marker => marker.addTo(map));
+            } else {
+                all_mines.forEach(marker => map.removeLayer(marker));
+            }
+        });
+    });
+    
 // Defining layer for Human Hunger Index
 fetch('africa.geojson')
     .then((response) => response.json())
