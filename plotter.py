@@ -11,7 +11,7 @@ all = ["Cameroon", "Chad", "Congo", "Djibouti", "Eritrea", "Eswatini", "Ethiopia
        "Namibia", "Niger", "Nigeria", "Rwanda", "Senegal", "Somalia", "South Africa", "Sudan", "Tanzania", "Uganda", "Zimbabwe"]
 
 x_params = ["farea","cropland","ghg","deforest"]
-y_params = ["hci","hdi","ghi","mortality","infant_mortality"]
+y_params = ["hci","hdi","ghi","mort","infm"]
 cols = x_params+y_params
 # print(cols)
 
@@ -22,7 +22,7 @@ for i,col in enumerate(cols):
         for k,v in x.items():
             data[k][i] = abs(float(v))
         
-print(data["Botswana"])
+print(data["Cameroon"])
 
 
 import numpy as np
@@ -74,7 +74,7 @@ for i in range(5):
 
 plt.xlabel(x_params[x_param])
 plt.ylabel('Population indicators')
-plt.title('Multiple Line Plots')
+plt.title('Africa: Land challenges')
 plt.legend()
 plt.grid(True)
 plt.show()

@@ -24,8 +24,9 @@ def compile_data(filename):
     
     return data
 
-
-im_data = compile_data('ghi.csv')
+ys = {"ghi","mort","infm","hdi","hci","health_access"}
+xs = {"deformation","cropland-area","farea","ghg","mining-c"}
+im_data = compile_data('mort.csv')
 env_data = compile_data('ghg.csv')
 # # print(im_data)
 # country = "Ethiopia"
@@ -56,28 +57,43 @@ def scale(ydata):
 # plt.grid(True)
 # plt.show()
 
-
-countries = all[1:9]
-print(countries)
-print(len(countries))
-fig, axes = plt.subplots(len(countries)//3+1, 3, figsize=(10, 6*len(countries)), sharex=True)
-
-for i, country in enumerate(countries):
+for country in all:
     y_series = im_data[country] 
     x_series = env_data[country]
-
-    # print("Len ",country,len(y_series),len(x_series))
-    if (len(y_series)>0):
-        axes[i//3,i%3].plot(y_series.keys(), scale(list(y_series.values())), label="Emissions")
+    if len(y_series)>0:
+        plt.plot(y_series.keys(), scale(list(y_series.values())), label="Mortality")
     if (len(x_series)>0):
-        axes[i//3,i%3].plot(x_series.keys(), scale(list(x_series.values())), label="Deforestation")
+        plt.plot(x_series.keys(), scale(list(x_series.values())), label="Emissions")
 
-    axes[i//3,i%3].set_title(country)
-    axes[i//3,i%3].set_ylabel('National Index')
-    # axes[i].grid(True)
-    axes[i//3,i%3].legend()
+    plt.title(country)
+    plt.ylabel('National Index')
+    plt.legend()
+    plt.xlabel("Year")
+    plt.savefig(+"/"country+".png")
 
-plt.xlabel("Year")
-plt.tight_layout()
+# countries = all[1:9]
+# print(countries)
+# print(len(countries))
+# fig, axes = plt.subplots(len(countries)//3+1, 3, figsize=(10, 6*len(countries)), sharex=True)
 
-plt.show()
+# plt.subplots_adjust(hspace=0.5)
+
+# for i, country in enumerate(countries):
+#     y_series = im_data[country] 
+#     x_series = env_data[country]
+
+#     # print("Len ",country,len(y_series),len(x_series))
+#     if (len(y_series)>0):
+#         axes[i//3,i%3].plot(y_series.keys(), scale(list(y_series.values())), label="Emissions")
+#     if (len(x_series)>0):
+#         axes[i//3,i%3].plot(x_series.keys(), scale(list(x_series.values())), label="Deforestation")
+
+#     axes[i//3,i%3].set_title(country)
+#     axes[i//3,i%3].set_ylabel('National Index')
+#     # axes[i].grid(True)
+#     axes[i//3,i%3].legend()
+
+# plt.xlabel("Year")
+# plt.tight_layout()
+
+# plt.show()
