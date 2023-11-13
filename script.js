@@ -110,13 +110,53 @@ fetch('african_countries.json')
             }
         });
 
+        // button toggle for Hunder Index
         var hungerCheckbox = document.getElementById('hunger');
-
         hungerCheckbox.addEventListener('change', () => {
             if (hungerCheckbox.checked) {
-                geoJSONLayer.addTo(map);
-            } else if (map.hasLayer(geoJSONLayer)) {
-                map.removeLayer(geoJSONLayer);
+                geoJSONLayer_Hunger.addTo(map);
+            } else if (map.hasLayer(geoJSONLayer_Hunger)) {
+                map.removeLayer(geoJSONLayer_Hunger);
+            }
+        });
+
+        // button toggle for Human developemnt Index
+        var DevCheckbox = document.getElementById('dev');
+        DevCheckbox.addEventListener('change', () => {
+            if (DevCheckbox.checked) {
+                geoJSONLayer_Dev.addTo(map);
+            } else if (map.hasLayer(geoJSONLayer_Dev)) {
+                map.removeLayer(geoJSONLayer_Dev);
+            }
+        });
+
+        // button toggle for Human capital Index
+        var CapitalCheckbox = document.getElementById('capital');
+        CapitalCheckbox.addEventListener('change', () => {
+            if (CapitalCheckbox.checked) {
+                geoJSONLayer_HCI.addTo(map);
+            } else if (map.hasLayer(geoJSONLayer_HCI)) {
+                map.removeLayer(geoJSONLayer_HCI);
+            }
+        });
+
+        // button toggle for Human mortality rate
+        var MortalityCheckbox = document.getElementById('mortality');
+        MortalityCheckbox.addEventListener('change', () => {
+            if (MortalityCheckbox.checked) {
+                geoJSONLayer_Mortality.addTo(map);
+            } else if (map.hasLayer(geoJSONLayer_Mortality)) {
+                map.removeLayer(geoJSONLayer_Mortality);
+            }
+        });
+
+        // button toggle for Infant mortality rate
+        var InfantCheckbox = document.getElementById('infant');
+        InfantCheckbox.addEventListener('change', () => {
+            if (InfantCheckbox.checked) {
+                geoJSONLayer_Infant.addTo(map);
+            } else if (map.hasLayer(geoJSONLayer_Infant)) {
+                map.removeLayer(geoJSONLayer_Infant);
             }
         });
 
@@ -167,21 +207,132 @@ fetch('african_countries.json')
         });
     });
 
+
+// Defining layer for Human Hunger Index
 fetch('africa.geojson')
     .then((response) => response.json())
     .then((data) => {
-        geoJSONLayer = L.geoJSON(data, {
+        geoJSONLayer_Hunger = L.geoJSON(data, {
             style: (feature) => {
-              return { fillColor: colorScale(feature.properties.colorValue), 
-                fillOpacity: 0.4,
-                color: 'black',
-                weight: 1, };
+                if (feature.properties.GHI > 30){
+                    return { fillColor: colorScale(feature.properties.colorValue), 
+                        fillOpacity: 0.4,
+                        color: 'red',
+                        weight: 1, };
+                }
+                else{
+                    return { fillColor: colorScale(feature.properties.colorValue), 
+                        fillOpacity: 0.4,
+                        color: 'green',
+                        weight: 1, };
+                }
             },
             onEachFeature: function (feature, layer) {
-              layer.bindPopup(feature.properties.ADMIN+" "+toString(feature.properties.ghi));
+              layer.bindPopup(feature.properties.ADMIN+": Global Hunder Index: "+feature.properties.GHI);
             },
         });
     });
+
+// Defining layer for Human Development Index
+fetch('africa.geojson')
+    .then((response) => response.json())
+    .then((data) => {
+        geoJSONLayer_Dev = L.geoJSON(data, {
+            style: (feature) => {
+                if (feature.properties.HDI > 0.5){
+                    return { fillColor: colorScale(feature.properties.colorValue), 
+                        fillOpacity: 0.4,
+                        color: 'red',
+                        weight: 1, };
+                }
+                else{
+                    return { fillColor: colorScale(feature.properties.colorValue), 
+                        fillOpacity: 0.4,
+                        color: 'green',
+                        weight: 1, };
+                }
+            },
+            onEachFeature: function (feature, layer) {
+              layer.bindPopup(feature.properties.ADMIN+": Human Development Index: "+feature.properties.HDI);
+            },
+        });
+    });
+
+// Defining layer for Human Capital Index
+fetch('africa.geojson')
+    .then((response) => response.json())
+    .then((data) => {
+        geoJSONLayer_HCI = L.geoJSON(data, {
+            style: (feature) => {
+                if (feature.properties.HCI > 0.4){
+                    return { fillColor: colorScale(feature.properties.colorValue), 
+                        fillOpacity: 0.4,
+                        color: 'red',
+                        weight: 1, };
+                }
+                else{
+                    return { fillColor: colorScale(feature.properties.colorValue), 
+                        fillOpacity: 0.4,
+                        color: 'green',
+                        weight: 1, };
+                }
+            },
+            onEachFeature: function (feature, layer) {
+              layer.bindPopup(feature.properties.ADMIN+": Human Capital Index: "+feature.properties.HCI);
+            },
+        });
+    });
+
+// Defining layer for Human Mortality Index
+fetch('africa.geojson')
+    .then((response) => response.json())
+    .then((data) => {
+        geoJSONLayer_Mortality = L.geoJSON(data, {
+            style: (feature) => {
+                if (feature.properties.MORT  > 1250){
+                    return { fillColor: colorScale(feature.properties.colorValue), 
+                        fillOpacity: 0.4,
+                        color: 'red',
+                        weight: 1, };
+                }
+                else{
+                    return { fillColor: colorScale(feature.properties.colorValue), 
+                        fillOpacity: 0.4,
+                        color: 'green',
+                        weight: 1, };
+                }
+            },
+            onEachFeature: function (feature, layer) {
+              layer.bindPopup(feature.properties.ADMIN+": Human Mortality: "+feature.properties.MORT);
+            },
+        });
+    });
+
+// Defining layer for Infant Mortality Index
+fetch('africa.geojson')
+    .then((response) => response.json())
+    .then((data) => {
+        geoJSONLayer_Infant = L.geoJSON(data, {
+            style: (feature) => {
+                if (feature.properties.INFM  > 5){
+                    return { fillColor: colorScale(feature.properties.colorValue), 
+                        fillOpacity: 0.4,
+                        color: 'red',
+                        weight: 1, };
+                }
+                else{
+                    return { fillColor: colorScale(feature.properties.colorValue), 
+                        fillOpacity: 0.4,
+                        color: 'green',
+                        weight: 1, };
+                }
+            },
+            onEachFeature: function (feature, layer) {
+              layer.bindPopup(feature.properties.ADMIN+": Infant Mortality: "+feature.properties.INFM);
+            },
+        });
+    });
+
 
 var encodedKeywords = encodeURIComponent('africa land issues desertification');
 
