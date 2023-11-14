@@ -160,6 +160,16 @@ fetch('african_countries.json')
             }
         });
 
+        // button toggle for Land Degradation
+        var DegradationCheckbox = document.getElementById('degradation');
+        DegradationCheckbox.addEventListener('change', () => {
+            if (DegradationCheckbox.checked) {
+                geoJSONLayer_Degradation.addTo(map);
+            } else if (map.hasLayer(geoJSONLayer_Degradation)) {
+                map.removeLayer(geoJSONLayer_Degradation);
+            }
+        });
+
         // next card
         const block1 = document.querySelector('.block-3');
         const block2 = document.querySelector('.block-4');
@@ -429,6 +439,31 @@ fetch('africa.geojson')
             },
             onEachFeature: function (feature, layer) {
               layer.bindPopup(feature.properties.ADMIN+": Infant Mortality: "+feature.properties.INFM);
+            },
+        });
+    });
+
+// Defining layer for Land Degradation
+fetch('africa.geojson')
+    .then((response) => response.json())
+    .then((data) => {
+        geoJSONLayer_Degradation = L.geoJSON(data, {
+            style: (feature) => {
+                if (feature.properties.DEG  > 20){
+                    return { fillColor: colorScale(feature.properties.colorValue), 
+                        fillOpacity: 0.4,
+                        color: 'red',
+                        weight: 1, };
+                }
+                else{
+                    return { fillColor: colorScale(feature.properties.colorValue), 
+                        fillOpacity: 0.4,
+                        color: 'green',
+                        weight: 1, };
+                }
+            },
+            onEachFeature: function (feature, layer) {
+              layer.bindPopup(feature.properties.ADMIN+": Land Degradation: "+feature.properties.DEG);
             },
         });
     });
