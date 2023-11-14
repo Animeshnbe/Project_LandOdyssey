@@ -274,6 +274,39 @@ fetch('africa_mines.json')
             }
         });
     });
+
+    fetch('landfill_loc.json')
+    .then(response => response.json())
+    .then(data => {
+        var landfills = [];
+        
+        data.forEach(item => {
+            const popupContent = document.createElement('div');
+            popupContent.className = 'mines-popup';
+            popupContent.innerHTML = `
+                <div class="custom-popup">
+                    <h2>${item.name}</h2>
+                </div>
+            `;
+
+            const marker = L.marker([item.lat, item.lon], { icon: L.icon({ iconSize: [20, 20], iconUrl: `img/delete.png` }) })
+                .bindPopup(popupContent, { maxWidth: 300 })
+                .on('click', () => {
+                    L.popup().setContent(popupContent).setLatLng([country.lat, country.lon]).openOn(map);
+                });
+            landfills.push(marker);
+        });
+
+        var mineMarker = document.getElementById('landfills');
+        mineMarker.addEventListener('change', () => {
+            // console.log(landfills);
+            if (mineMarker.checked) {
+                landfills.forEach(marker => marker.addTo(map));
+            } else {
+                landfills.forEach(marker => map.removeLayer(marker));
+            }
+        });
+    });
     
 // Defining layer for Human Hunger Index
 fetch('africa.geojson')
