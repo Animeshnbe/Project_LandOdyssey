@@ -1,0 +1,11 @@
+[
+    { "name": "Olusosun", "country": "Nigeria", "lat": 6.594509, "lon": 3.376491},
+
+    { "name": "Koshe", "country": "Ethiopia", "lat": 8.9758918, "lon": 38.71122976},
+
+    { "name": "Agbogbloshie", "country": "Ghana", "lat": 5.5499718, "lon": -0.2104866},
+
+    { "name": "Dandora", "country": "Kenya", "lat": -1.248540, "lon": 36.902100},
+
+    { "name": "Bisasar Road","country": "South Africa", "lat": -29.816562, "lon": 30.980415}
+]

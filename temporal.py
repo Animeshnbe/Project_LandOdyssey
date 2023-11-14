@@ -1,6 +1,10 @@
 import csv
 # import json
-
+from matplotlib import pyplot as plt
+import numpy as np
+import os
+from sklearn.preprocessing import MinMaxScaler
+import json
 
 all = ["Cameroon", "Chad", "Congo", "Djibouti", "Eritrea", "Eswatini", "Ethiopia", "Lesotho", "Malawi", "Mali", "Mauritania", 
        "Namibia", "Niger", "Nigeria", "Rwanda", "Senegal", "Somalia", "South Africa", "Sudan", "Tanzania", "Uganda", "Zimbabwe"]
@@ -24,22 +28,6 @@ def compile_data(filename):
     
     return data
 
-ys = {"ghi","mort","infm","hdi","hci","health_access"}
-xs = {"deformation","cropland-area","farea","ghg","mining-c"}
-im_data = compile_data('mort.csv')
-env_data = compile_data('ghg.csv')
-# # print(im_data)
-# country = "Ethiopia"
-# common_years = set(im_data[country].keys()) & set(env_data[country].keys())
-
-# y_series = im_data[country]
-# # x_series = {year: env_data[country][year] for year in common_years}
-# x_series = env_data[country]
-
-from matplotlib import pyplot as plt
-import numpy as np
-from sklearn.preprocessing import MinMaxScaler
-
 def scale(ydata):
     scaler = MinMaxScaler()
     y_values_scaled = scaler.fit_transform(np.array(ydata).reshape(-1, 1))
@@ -47,29 +35,62 @@ def scale(ydata):
     y_values_scaled = y_values_scaled.flatten()
     return y_values_scaled
 
-# plt.figure(figsize=(10, 6))
-# plt.plot(y_series.keys(), scale(list(y_series.values())), label="Hunger")
-# plt.plot(x_series.keys(), scale(list(x_series.values())), label="Deforestation")
-# plt.xlabel("Year")
-# plt.ylabel('National Index')
-# plt.title(country)
-# plt.legend()
-# plt.grid(True)
-# plt.show()
+ys = {"hdi"}
+xs = {"cropland-area","farea","gold-prod"}
 
+names = {"ghi":"Hunger Index",
+            "mort":"Mortality",
+            "infm":"Infant Mortality",
+            "hdi":"Human Development Index",
+            "hci":"Human Capital Index",
+            "health_access":"Healthcare access/quality",
+            "conflict-and-terror":"Conflict and terror",
+            "deforestation":"Deforestation","cropland-area":"Cropland area","farea":"Forest area",
+            "ghg":"Greenhouse emissions","gold-prod":"Gold production"}
+
+corrs = {}
 for country in all:
-    y_series = im_data[country] 
-    x_series = env_data[country]
-    if len(y_series)>0:
-        plt.plot(y_series.keys(), scale(list(y_series.values())), label="Mortality")
-    if (len(x_series)>0):
-        plt.plot(x_series.keys(), scale(list(x_series.values())), label="Emissions")
+    for x in xs:
+        env_data = compile_data(x+'.csv')
+        for y in ys:
+            im_data = compile_data(y+'.csv')
+            y_series = im_data[country] 
+            x_series = env_data[country]
 
-    plt.title(country)
-    plt.ylabel('National Index')
-    plt.legend()
-    plt.xlabel("Year")
-    plt.savefig(+"/"country+".png")
+            if len(y_series)<3 or len(x_series)<3:
+                continue
+
+            y_data = list(y_series.values())
+            x_data = list(x_series.values())
+
+            common_years = set(im_data[country].keys()) & set(env_data[country].keys())
+            if len(common_years)>1:
+                x_common = scale([env_data[country][year] for year in common_years])
+                y_common = scale([im_data[country][year] for year in common_years])
+                
+                corr = np.corrcoef(x_common, y_common)[0,1]
+                if abs(corr) > 0.5:
+                    # print(country+": "+x+"_"+y)
+                    # print(corr)
+                    corrs[country+"_"+x+"_"+y] = corr
+
+                    plt.plot(y_series.keys(), scale(y_data), label=names[y])
+                    plt.plot(x_series.keys(), scale(x_data), label=names[x])
+
+                    plt.title(country)
+                    plt.ylabel('Normalised Index')
+                    plt.legend()
+                    plt.xlabel("Year")
+                    if not os.path.exists('plots/'+country):
+                        os.makedirs('plots/'+country)
+                    # plt.show()
+                    plt.savefig("plots/"+country+"/"+y+"_"+x+".png")
+                    plt.clf()
+    # break
+
+with open("plot_relation.json", "w") as outfile:
+    json.dump(corrs, outfile)
+
 
 # countries = all[1:9]
 # print(countries)
