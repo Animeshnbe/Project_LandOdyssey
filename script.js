@@ -485,7 +485,15 @@ function generateImage(countryname) {
     const imageSource = `plots/${countryname}/${group1Selected.value}_${group2Selected.value}.png`;
     
     console.log(imageSource);
-    document.getElementById('plot-data').src = imageSource;
+    const img = new Image();
+    img.onload = function () {
+        document.getElementById('plot-data').src = imageSource;
+    };
+    img.onerror = function () {
+        document.getElementById('plot-data').src = 'no_data.jpg';
+    };
+    img.src = imageSource;
+    // document.getElementById('plot-data').src = imageSource;
     document.getElementById('countryplot').style.display = 'block';
 }
 
@@ -514,6 +522,7 @@ fetch('africa.geojson')
                         <input type="radio" name="group1" value="hdi"> HDI
                         <input type="radio" name="group1" value="mort"> Mortality
                         <input type="radio" name="group1" value="ghi"> Hunger
+                        <input type="radio" name="group1" value="conflict-and-terror"> Conflicts
                     </label>
                     <br>
                     <label>
@@ -521,6 +530,7 @@ fetch('africa.geojson')
                         <input type="radio" name="group2" value="gold-prod"> Mining
                         <input type="radio" name="group2" value="deforestation"> Deforestation
                         <input type="radio" name="group2" value="degraded"> Land Degradation
+                        <input type="radio" name="group2" value="ghg"> Emissions
                     </label>
                     <br>
                     <button type="button" onclick="generateImage('${feature.properties.ADMIN}')">Go</button>

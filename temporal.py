@@ -36,7 +36,7 @@ def scale(ydata):
     return y_values_scaled
 
 ys = {"ghi","mort","hdi","conflict-and-terror"}
-xs = {"ghg","degraded","deforestation","gold-prod"}
+xs = {"ghg","degraded"}
 
 names = {"ghi":"Hunger Index",
             "mort":"Mortality",
@@ -89,8 +89,8 @@ for country in all:
                 plt.clf()
     # break
 
-with open("plot_relation.json", "w") as outfile:
-    json.dump(corrs, outfile)
+# with open("plot_relation.json", "w") as outfile:
+#     json.dump(corrs, outfile)
 
 
 # countries = all[1:9]
