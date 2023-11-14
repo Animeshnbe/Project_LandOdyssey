@@ -28,6 +28,16 @@
         </div>
     </div>
 
+    <div id="slider" class="slidemodal">
+        <div class="slidecontent">
+            <img id="sat-data" alt="No data">
+            <a href="#"
+               class="overbox-close" onclick="closeModal()">
+                ×
+            </a>
+        </div>
+    </div>
+
     <div class="card" id="map"></div>
 
     <div class="card block-1">
@@ -73,22 +83,27 @@
     </div>
 
     <div class="card block-2">
-        Solutions and Mission progress
+        Solutions and Initiatives
         <ul class="initiatives">
-            <li>Great Green Wall</li>
-            <li>AFR100 Reforestation</li>
+            <li><a href="https://www.unccd.int/our-work/ggwi">Great Green Wall</a></li>
+            <li><a href="https://www.awf.org/land-habitat-protection">Land & Habitat Protection</a></li>
+            <li><a href="https://www.fao.org/3/z5700e/z5700e00.htm">Rehab by FAO</a></li>
         </ul>
+        <div class="doom">Doomsday countdown<br/>
+            <span id="countdown"></span>
+            <p style="font-size: small;">The Doomsday Clock takes into account factors as agriculture and the unsustainable use of land resources. It projects that by 2214 AD, land would be irrecoverably depleted.</p>
+        </div>
     </div>
 
     <div class="card block-3">
         <div class="ImageSlider">Africa land and climate patterns
-            <div class="n"><img src="./img/rs/aridity.png" alt=""></div>
-            <div class="n"><img src="./img/rs/desertif_vulner.png" alt=""></div>
-            <div class="n"><img src="./img/rs/land_degradation.png" alt=""></div>
-            <div class="n"><img src="./img/rs/rainfall.png" alt=""></div>
-            <div class="n"><img src="./img/rs/soil_loss.png" alt=""></div>
-            <div class="n"><img src="./img/rs/soil_productivity.png" alt=""></div>
-            <div class="n"><img src="./img/rs/soil_nutrient.png" alt=""></div>
+            <div class="n"><img src="./img/rs/aridity.png" alt="" onclick="openfull('./img/rs/aridity.png')"></div>
+            <div class="n"><img src="./img/rs/desertif_vulner.png" alt="" onclick="openfull('./img/rs/desertif_vulner.png')"></div>
+            <div class="n"><img src="./img/rs/land_degradation.png" alt="" onclick="openfull('./img/rs/land_degradation.png')"></div>
+            <div class="n"><img src="./img/rs/rainfall.png" alt="" onclick="openfull('./img/rs/rainfall.png')"></div>
+            <div class="n"><img src="./img/rs/soil_loss.png" alt="" onclick="openfull('./img/rs/soil_loss.png')"></div>
+            <div class="n"><img src="./img/rs/soil_productivity.png" alt="" onclick="openfull('./img/rs/soil_productivity.png')"></div>
+            <div class="n"><img src="./img/rs/soil_nutrient.png" alt="" onclick="openfull('./img/rs/soil_nutrient.png')"></div>
         </div>
         <div class="navigation">
             <button id="left"><i class="fa-solid fa-angle-left"></i></button>
@@ -99,7 +114,11 @@
     </div>
 
     <div class="card block-4" id="map2">
-        <!-- Content of the top-left block goes here -->
+    </div>
+
+    <div class="card block-5">
+        <em>Credits: Our World in Data, UNEP <br/>
+            <strong>©</strong> EST Team 28, PG2@IIITH, 2023</em>
     </div>
 
     <div class="card news">

@@ -496,8 +496,9 @@ fetch(req)
     
 
 const map2 = L.map('map2', {
-    maxZoom: 2.7, // Set the maximum allowed zoom level
-    minZoom: 2.6, // Set the minimum allowed zoom level
+    zoomControl: false,
+    maxZoom: 2.6, // Set the maximum allowed zoom level
+    minZoom: 2.5, // Set the minimum allowed zoom level
 }).setView([-3, 15], 1);
 
 
@@ -534,6 +535,7 @@ function generateImage(countryname) {
 
 function closeModal(){
     document.getElementById('countryplot').style.display = 'none';
+    document.getElementById('slider').style.display = 'none';
 }
 
 fetch('africa.geojson')
@@ -550,29 +552,61 @@ fetch('africa.geojson')
             },
             onEachFeature: function (feature, layer) {
                 const popupContent = document.createElement('div');
-                popupContent.innerHTML = `<h2> ${feature.properties.ADMIN}</h2>
+                popupContent.style.padding = 0;
+                popupContent.innerHTML = `<h3> ${feature.properties.ADMIN}</h3>
                 <form id="imageForm">
                     <label>
-                        Index:
+                        <strong>Index:</strong>
+                    </label>
                         <input type="radio" name="group1" value="hdi"> HDI
-                        <input type="radio" name="group1" value="mort"> Mortality
+                        <input type="radio" name="group1" value="mort"> Mortality <br/>
                         <input type="radio" name="group1" value="ghi"> Hunger
                         <input type="radio" name="group1" value="conflict-and-terror"> Conflicts
-                    </label>
+                    
                     <br>
                     <label>
-                        Environment:
-                        <input type="radio" name="group2" value="gold-prod"> Mining
-                        <input type="radio" name="group2" value="deforestation"> Deforestation
-                        <input type="radio" name="group2" value="degraded"> Land Degradation
-                        <input type="radio" name="group2" value="ghg"> Emissions
+                        <strong>Issues:</strong>
                     </label>
+                        <input type="radio" name="group2" value="gold-prod"> Mining
+                        <input type="radio" name="group2" value="ghg"> Emissions
+                        <input type="radio" name="group2" value="deforestation"> Deforestation
+                        <input type="radio" name="group2" value="degraded"> Soil Degradation
+                        
+                    
                     <br>
                     <button type="button" onclick="generateImage('${feature.properties.ADMIN}')">Go</button>
                 </form>`;
                 // popupContent.innerHTML = `<img src='plots/${feature.properties.ADMIN}/${random}'/>`;
-                layer.bindPopup(popupContent, { maxWidth: 300 });
+                layer.bindPopup(popupContent, { maxWidth: 200 });
             },
         });
         geoJSONPlotLayer.addTo(map2);
     });
+
+    var countDownDate = new Date("Jan 1, 2214 11:30:25").getTime();
+    var x = setInterval(function() {
+      var now = new Date().getTime();
+        
+      // Find the distance between now and the count down date
+      var distance = countDownDate - now;
+        
+      var years = Math.floor(distance / (1000 * 60 * 60 * 24 * 365));
+      var days = Math.floor((distance % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        
+      document.getElementById("countdown").innerHTML = years + "y " +days+ "d " + hours + "h "
+      + minutes + "m " + seconds + "s ";
+        
+      // If the count down is over, write some text 
+      if (distance < 0) {
+        clearInterval(x);
+        document.getElementById("countdown").innerHTML = "EXPIRED";
+      }
+    }, 1000);
+
+function openfull(src){
+    document.getElementById('sat-data').src = src;
+    document.getElementById('slider').style.display = 'grid';
+}
