@@ -18,8 +18,17 @@
         <h1>Africa: A Land Odyssey</h1>
     </header>
 
+    <div id="countryplot" class="modal">
+        <div class="content">
+            <img id="plot-data" alt="No data">
+            <a href="#"
+               class="box-close" onclick="closeModal()">
+                ×
+            </a>
+        </div>
+    </div>
+
     <div class="card" id="map"></div>
-    <script src="script.js"></script>
 
     <div class="card block-1">
         <!-- <form> -->
@@ -85,9 +94,8 @@
         <a url=""></a>
     </div>
 
-    <div class="card block-4">
+    <div class="card block-4" id="map2">
         <!-- Content of the top-left block goes here -->
-        Plots
     </div>
 
     <div class="card news">
@@ -97,4 +105,5 @@
     </div>
 
 </body>
+<script src="script.js"></script>
 </html>

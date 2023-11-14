@@ -35,8 +35,8 @@ def scale(ydata):
     y_values_scaled = y_values_scaled.flatten()
     return y_values_scaled
 
-ys = {"hdi"}
-xs = {"cropland-area","farea","gold-prod"}
+ys = {"ghi","mort","hdi","conflict-and-terror"}
+xs = {"degraded","deforestation","gold-prod"}
 
 names = {"ghi":"Hunger Index",
             "mort":"Mortality",
@@ -46,6 +46,7 @@ names = {"ghi":"Hunger Index",
             "health_access":"Healthcare access/quality",
             "conflict-and-terror":"Conflict and terror",
             "deforestation":"Deforestation","cropland-area":"Cropland area","farea":"Forest area",
+            "degraded":"Share of Degraded land",
             "ghg":"Greenhouse emissions","gold-prod":"Gold production"}
 
 corrs = {}
@@ -74,18 +75,18 @@ for country in all:
                     # print(corr)
                     corrs[country+"_"+x+"_"+y] = corr
 
-                    plt.plot(y_series.keys(), scale(y_data), label=names[y])
-                    plt.plot(x_series.keys(), scale(x_data), label=names[x])
+                plt.plot(y_series.keys(), scale(y_data), label=names[y])
+                plt.plot(x_series.keys(), scale(x_data), label=names[x])
 
-                    plt.title(country)
-                    plt.ylabel('Normalised Index')
-                    plt.legend()
-                    plt.xlabel("Year")
-                    if not os.path.exists('plots/'+country):
-                        os.makedirs('plots/'+country)
-                    # plt.show()
-                    plt.savefig("plots/"+country+"/"+y+"_"+x+".png")
-                    plt.clf()
+                plt.title(country)
+                plt.ylabel('Normalised Index')
+                plt.legend()
+                plt.xlabel("Year")
+                if not os.path.exists('plots/'+country):
+                    os.makedirs('plots/'+country)
+                # plt.show()
+                plt.savefig("plots/"+country+"/"+y+"_"+x+".png")
+                plt.clf()
     # break
 
 with open("plot_relation.json", "w") as outfile:

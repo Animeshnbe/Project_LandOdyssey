@@ -275,7 +275,7 @@ fetch('africa_mines.json')
         });
     });
 
-    fetch('landfill_loc.json')
+fetch('landfill_loc.json')
     .then(response => response.json())
     .then(data => {
         var landfills = [];
@@ -460,3 +460,70 @@ fetch(req)
 });
     
 
+const map2 = L.map('map2', {
+    maxZoom: 2.7, // Set the maximum allowed zoom level
+    minZoom: 2.6, // Set the minimum allowed zoom level
+}).setView([-3, 15], 1);
+
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> contributors'
+}).addTo(map2);
+
+function generateImage(countryname) {
+    const group1Selected = document.querySelector('input[name="group1"]:checked');
+    const group2Selected = document.querySelector('input[name="group2"]:checked');
+
+    if (!group1Selected || !group2Selected) {
+        alert("Please select options from both groups before clicking Go.");
+        return;
+    }
+    const imageSource = `plots/${countryname}/${group1Selected.value}_${group2Selected.value}.png`;
+    
+    console.log(imageSource);
+    document.getElementById('plot-data').src = imageSource;
+    document.getElementById('countryplot').style.display = 'block';
+}
+
+function closeModal(){
+    document.getElementById('countryplot').style.display = 'none';
+}
+
+fetch('africa.geojson')
+    .then((response) => response.json())
+    .then((data) => {
+        
+        
+        geoJSONPlotLayer = L.geoJSON(data, {
+            style: (feature) => {
+                return { fillColor: colorScale(feature.properties.colorValue), 
+                        fillOpacity: 0.4,
+                        color: 'blue',
+                        weight: 1, };
+            },
+            onEachFeature: function (feature, layer) {
+                const popupContent = document.createElement('div');
+                popupContent.innerHTML = `<h2> ${feature.properties.ADMIN}</h2>
+                <form id="imageForm">
+                    <label>
+                        Index:
+                        <input type="radio" name="group1" value="hdi"> HDI
+                        <input type="radio" name="group1" value="mort"> Mortality
+                        <input type="radio" name="group1" value="ghi"> Hunger
+                    </label>
+                    <br>
+                    <label>
+                        Environment:
+                        <input type="radio" name="group2" value="gold-prod"> Mining
+                        <input type="radio" name="group2" value="deforestation"> Deforestation
+                        <input type="radio" name="group2" value="degraded"> Land Degradation
+                    </label>
+                    <br>
+                    <button type="button" onclick="generateImage('${feature.properties.ADMIN}')">Go</button>
+                </form>`;
+                // popupContent.innerHTML = `<img src='plots/${feature.properties.ADMIN}/${random}'/>`;
+                layer.bindPopup(popupContent, { maxWidth: 300 });
+            },
+        });
+        geoJSONPlotLayer.addTo(map2);
+    });
