@@ -55,9 +55,9 @@ def compile_data(filename):
     
     return data
 
-im_data = compile_data('annual-deforestation.csv')
+im_data = compile_data('degraded.csv')
 values = {entity: float(data['Value']) for entity, data in im_data.items() if entity in all}
 
 print(values)
-with open("deforest.json", "w") as outfile:
+with open("degraded.json", "w") as outfile:
     json.dump(values, outfile)

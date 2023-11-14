@@ -36,7 +36,7 @@ def scale(ydata):
     return y_values_scaled
 
 ys = {"ghi","mort","hdi","conflict-and-terror"}
-xs = {"degraded","deforestation","gold-prod"}
+xs = {"ghg","degraded","deforestation","gold-prod"}
 
 names = {"ghi":"Hunger Index",
             "mort":"Mortality",
