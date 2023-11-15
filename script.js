@@ -473,7 +473,7 @@ var encodedKeywords = encodeURIComponent('africa land issues desertification');
 
 var url = 'https://newsapi.org/v2/everything?' +
 `q=${encodedKeywords}&` +
-'from=2023-09-04&' +
+'from=2023-10-16&' +
 'sortBy=popularity&' +
 'apiKey=5e20f1995abc4304993763e0f6566867';
 
