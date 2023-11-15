@@ -129,6 +129,7 @@ body {
     margin-bottom: 20px;
     font: 300 16px/1.7 'Open Sans', sans-serif;
     background-color: #dce9d5;
+    margin-top: 0;
 }
 
 * {
